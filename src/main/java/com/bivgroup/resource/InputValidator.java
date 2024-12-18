@@ -1,6 +1,6 @@
 package com.bivgroup.resource;
 
-import com.bivgroup.pojo.GetNotificationsByContractNumberRequest;
+import com.bivgroup.pojo.Request.GetNotificationsByContractNumberRequest;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.Valid;
 
@@ -12,5 +12,4 @@ public class InputValidator {
             throw new Exception();
         }
     }
-
 }

@@ -1,16 +1,20 @@
-package com.bivgroup.pojo;
+package com.bivgroup.pojo.Response;
 
+import com.bivgroup.pojo.Contract;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class UpdateAccountRequest extends BaseRequest {
+public class GetUserDataResponse extends BaseResponse {
 
-    private String userLogin;
+    private Long insurerId;
     private String insurerName;
     private String insurerSurname;
     private String insurerLastName;
     private String insurerEmail;
     private String insurerPhoneNumber;
+    private List<Contract> contracts;
 }

@@ -1,15 +1,12 @@
 package com.bivgroup.resource;
 
-import com.bivgroup.pojo.GetNotificationsByContractNumberRequest;
-import com.bivgroup.pojo.NotificationResponse;
+import com.bivgroup.pojo.Request.GetNotificationsByContractNumberRequest;
+import com.bivgroup.service.FormResponseService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
-import java.util.Date;
-import java.util.UUID;
 
 @Path("/vlk")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,6 +16,9 @@ public class VLKResource {
 
     @Inject
     InputValidator inputValidator;
+
+    @Inject
+    FormResponseService formResponseService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -30,14 +30,10 @@ public class VLKResource {
     @Path("/notifications/getByContractNumber")
     public Response getNotificationsByContractNumber(GetNotificationsByContractNumberRequest request) throws Exception {
         inputValidator.validateGetNotificationsByContractNumberRequest(request);
-        NotificationResponse response = new NotificationResponse();
-        response.setRqId(request.getRqId());
-        response.setRsTm(new Date().toString());
-        response.setRsId(UUID.randomUUID().toString().replace("-", ""));
-        response.setInsurerId(1L);
-        response.setInsurerNotifications(null);
-        response.setStatusCode(0L);
-        response.setStatusDescription("Обработан успешно");
-        return Response.status(Response.Status.OK).entity(response).build();
+        return Response
+                .status(Response.Status.OK)
+                .entity(
+                        formResponseService.formResponse(request, 228L, null, 1L, "Обработан успешно")
+                ).build();
     }
 }

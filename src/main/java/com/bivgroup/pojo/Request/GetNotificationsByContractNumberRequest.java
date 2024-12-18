@@ -1,4 +1,4 @@
-package com.bivgroup.pojo;
+package com.bivgroup.pojo.Request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

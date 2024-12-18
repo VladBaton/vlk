@@ -1,5 +1,6 @@
-package com.bivgroup.pojo;
+package com.bivgroup.pojo.Response;
 
+import com.bivgroup.pojo.Notification;
 import lombok.Getter;
 import lombok.Setter;
 
