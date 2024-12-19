@@ -1,22 +1,19 @@
 package com.bivgroup.mapper;
 
-import com.bivgroup.pojo.Notification;
 import com.bivgroup.pojo.request.BaseRequest;
-import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
-import com.bivgroup.pojo.response.NotificationResponse;
+import com.bivgroup.pojo.response.BaseResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-
 @Mapper(componentModel = "cdi")
-public interface NotificationMapper {
+public interface BaseResponseMapper {
 
-    NotificationMapper INSTANCE = Mappers.getMapper(NotificationMapper.class);
+    BaseResponseMapper INSTANCE = Mappers.getMapper(BaseResponseMapper.class);
 
     @Mapping(target = "rsTm",
             expression = "java((new java.text.SimpleDateFormat(com.bivgroup.constant.Constants.DATE_PATTERN_TIME)).format(new java.util.Date()))")
     @Mapping(target = "rsId", expression = "java(java.util.UUID.randomUUID().toString().replace(\"-\", \"\"))")
-    NotificationResponse toNotificationResponse(BaseRequest request, Long insurerId, List<Notification> notifications, Long statusCode, String statusDescription);
+    BaseResponse toBaseResponse(BaseRequest request, Long statusCode, String statusDescription);
+
 }

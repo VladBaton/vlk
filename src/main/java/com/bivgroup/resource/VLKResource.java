@@ -20,12 +20,6 @@ public class VLKResource {
     @Inject
     FormResponseService formResponseService;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "Hello RESTEasy";
-    }
-
     @POST
     @Path("/notifications/getByContractNumber")
     public Response getNotificationsByContractNumber(GetNotificationsByContractNumberRequest request) throws Exception {
@@ -33,7 +27,7 @@ public class VLKResource {
         return Response
                 .status(Response.Status.OK)
                 .entity(
-                        formResponseService.formResponse(request, 228L, null, 0L, "Обработан успешно")
+                        formResponseService.formNotificationResponse(request, 228L, null, 0L, "Обработан успешно")
                 ).build();
     }
 }
