@@ -22,9 +22,9 @@ public class Insurer {
 
     private String phone;
 
-    @OneToOne
-    @JoinColumn(name = "CONTRACTID", nullable = false)
-    private Contract contract;
+
+    @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Contract> contracts;
 
     @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Notification> notifications;
@@ -77,12 +77,12 @@ public class Insurer {
         this.phone = phone;
     }
 
-    public Contract getContract() {
-        return contract;
+    public List<Contract> getContracts() {
+        return contracts;
     }
 
-    public void setContract(Contract contract) {
-        this.contract = contract;
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
     }
 
     public List<Notification> getNotifications() {

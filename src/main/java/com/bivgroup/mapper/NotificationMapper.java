@@ -2,7 +2,6 @@ package com.bivgroup.mapper;
 
 import com.bivgroup.pojo.Notification;
 import com.bivgroup.pojo.request.BaseRequest;
-import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
 import com.bivgroup.pojo.response.NotificationResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,5 +17,5 @@ public interface NotificationMapper {
     @Mapping(target = "rsTm",
             expression = "java((new java.text.SimpleDateFormat(com.bivgroup.constant.Constants.DATE_PATTERN_TIME)).format(new java.util.Date()))")
     @Mapping(target = "rsId", expression = "java(java.util.UUID.randomUUID().toString().replace(\"-\", \"\"))")
-    NotificationResponse toNotificationResponse(BaseRequest request, Long insurerId, List<Notification> notifications, Long statusCode, String statusDescription);
+    NotificationResponse toNotificationResponse(BaseRequest request, Long insurerId, List<Notification> insurerNotifications, Long statusCode, String statusDescription);
 }

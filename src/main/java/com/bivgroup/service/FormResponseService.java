@@ -4,14 +4,12 @@ import com.bivgroup.mapper.BaseResponseMapper;
 import com.bivgroup.mapper.NotificationMapper;
 import com.bivgroup.pojo.Notification;
 import com.bivgroup.pojo.request.BaseRequest;
-import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
 import com.bivgroup.pojo.response.BaseResponse;
 import com.bivgroup.pojo.response.NotificationResponse;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.core.Response;
 
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @ApplicationScoped
 public class FormResponseService {
@@ -21,7 +19,14 @@ public class FormResponseService {
     }
 
     public NotificationResponse formNotificationResponse(BaseRequest request, Long insurerId, List<Notification> notifications,
-                                             Long statusCode, String statusDescription) {
+                                                         Long statusCode, String statusDescription) {
         return NotificationMapper.INSTANCE.toNotificationResponse(request, insurerId, notifications, statusCode, statusDescription);
+    }
+
+    public Response formResponse(BaseResponse response) {
+        return Response
+                .status(Response.Status.OK)
+                .entity(response)
+                .build();
     }
 }

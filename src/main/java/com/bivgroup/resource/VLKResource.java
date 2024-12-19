@@ -2,6 +2,7 @@ package com.bivgroup.resource;
 
 import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
 import com.bivgroup.service.FormResponseService;
+import com.bivgroup.service.NotificationService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -23,14 +24,13 @@ public class VLKResource {
     @Inject
     FormResponseService formResponseService;
 
+    @Inject
+    NotificationService notificationService;
+
     @POST
     @Path("/notifications/getByContractNumber")
     public Response getNotificationsByContractNumber(GetNotificationsByContractNumberRequest request) throws Exception {
         inputValidator.validateGetNotificationsByContractNumberRequest(request);
-        return Response
-                .status(Response.Status.OK)
-                .entity(
-                        formResponseService.formNotificationResponse(request, 228L, null, 0L, "Обработан успешно")
-                ).build();
+        return notificationService.getNotificationsByContractNumber(request);
     }
 }

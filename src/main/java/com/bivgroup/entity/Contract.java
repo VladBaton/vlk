@@ -28,7 +28,8 @@ public class Contract extends PanacheEntityBase {
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications;
 
-    @OneToOne(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
+    @JoinColumn(name = "INSURERID")
     private Insurer insurer;
 
     public Long getContractId() {
