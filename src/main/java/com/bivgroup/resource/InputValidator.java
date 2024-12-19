@@ -1,6 +1,6 @@
 package com.bivgroup.resource;
 
-import com.bivgroup.pojo.Request.GetNotificationsByContractNumberRequest;
+import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.Valid;
 

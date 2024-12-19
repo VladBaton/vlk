@@ -1,4 +1,4 @@
-package com.bivgroup.pojo.Response;
+package com.bivgroup.pojo.response;
 
 public class BaseResponse {
 

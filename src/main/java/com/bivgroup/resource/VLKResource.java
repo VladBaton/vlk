@@ -1,6 +1,6 @@
 package com.bivgroup.resource;
 
-import com.bivgroup.pojo.Request.GetNotificationsByContractNumberRequest;
+import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
 import com.bivgroup.service.FormResponseService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -33,7 +33,7 @@ public class VLKResource {
         return Response
                 .status(Response.Status.OK)
                 .entity(
-                        formResponseService.formResponse(request, 228L, null, 1L, "Обработан успешно")
+                        formResponseService.formResponse(request, 228L, null, 0L, "Обработан успешно")
                 ).build();
     }
 }

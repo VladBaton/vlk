@@ -1,4 +1,4 @@
-package com.bivgroup.pojo.Request;
+package com.bivgroup.pojo.request;
 
 public class BaseRequest {
 

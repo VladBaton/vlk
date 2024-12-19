@@ -26,7 +26,7 @@ public class Insurer {
     @JoinColumn(name = "CONTRACTID", nullable = false)
     private Contract contract;
 
-    @OneToMany(mappedBy = "INSURER", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Notification> notifications;
 
     public Long getInsurerId() {

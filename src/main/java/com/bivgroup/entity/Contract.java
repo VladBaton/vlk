@@ -22,13 +22,13 @@ public class Contract extends PanacheEntityBase {
 
     private Date signDate;
 
-    @OneToMany(mappedBy = "CONTRACT", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Payment> payments;
 
-    @OneToMany(mappedBy = "CONTRACT", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications;
 
-    @OneToOne(mappedBy = "CONTRACT", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
     private Insurer insurer;
 
     public Long getContractId() {
