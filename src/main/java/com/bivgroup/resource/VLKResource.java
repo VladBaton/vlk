@@ -25,9 +25,6 @@ public class VLKResource {
     InputValidator inputValidator;
 
     @Inject
-    FormResponseService formResponseService;
-
-    @Inject
     NotificationService notificationService;
 
     @Inject
