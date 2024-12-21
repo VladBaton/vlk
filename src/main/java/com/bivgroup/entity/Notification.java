@@ -1,6 +1,10 @@
 package com.bivgroup.entity;
 
 import jakarta.persistence.*;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "NOTIFICATION")
@@ -21,6 +25,9 @@ public class Notification {
     private Long eventCode;
 
     private String message;
+
+    @CreationTimestamp
+    private Date createDate;
 
     public Long getNotificationId() {
         return notificationId;
@@ -60,5 +67,13 @@ public class Notification {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

@@ -13,7 +13,7 @@ public class Contract {
     private String contractNumber;
     private Long contractId;
     private Date startDate;
-    private Date finishDate;
+    private Date endDate;
     private Date signDate;
     private List<Payment> payments;
 }

@@ -3,6 +3,7 @@ package com.bivgroup.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Payment extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
 
-    private Double amount;
+    private BigDecimal amount;
 
     private Date payDate;
 
@@ -38,11 +39,11 @@ public class Payment extends PanacheEntityBase {
         this.paymentId = paymentId;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
