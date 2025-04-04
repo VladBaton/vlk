@@ -71,5 +71,4 @@ public class InputValidator {
     public void validateAuthorizationRequest(@Valid AuthorizationRequest request) {
         //Вставить сюда логику проверки запроса
     }
-
 }
