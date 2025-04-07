@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    
+    <changeSet id="CHSU-0004-7" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <tableExists tableName="CONTRACT"/>
+        </preConditions>
+        <sql>
+            CREATE OR REPLACE FUNCTION notify_new_contract()
+            RETURNS TRIGGER AS $$
+            BEGIN
+            INSERT INTO NOTIFICATION (contractId, eventCode, message)
+            VALUES (NEW.contractId, 1 ,'Контракт ' || NEW.contractNumber || ' оформлен, дата начала действия: ' || TO_CHAR(NEW.startDate, 'YYYY-MM-DD'));
+            RETURN NEW;
+            END
+            $$ LANGUAGE plpgsql;
+
+            create OR REPLACE TRIGGER new_contract_trigger
+            AFTER INSERT ON CONTRACT
+            FOR EACH ROW
+            EXECUTE FUNCTION notify_new_contract();
+        </sql>
+    </changeSet>
+
+    <!--<changeSet id="CHSU-0004-8" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <tableExists tableName="PAYMENT"/>
+        </preConditions>
+        <sqlFile path="sql/CHSU-0004.sql" relativeToChangelogFile="true"/>
+    </changeSet> -->
+
+</databaseChangeLog>

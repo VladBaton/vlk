@@ -1,0 +1,1 @@
+* CHSU-0003: Переход на liquibase

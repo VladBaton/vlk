@@ -141,4 +141,127 @@
         </comment>
     </changeSet>
 
+    <changeSet id="CHSU-0004-1" author="Vladislav.Suslonov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="NOTIFICATIONTYPE"/>
+                </not>
+                <tableExists tableName="NOTIFICATION"/>
+            </and>
+        </preConditions>
+        <createTable tableName="NOTIFICATIONTYPE">
+            <column name="NOTIFICATIONTYPEID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NOTIFICATIONTYPENAME" type="VARCHAR(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+        <comment>
+            CHSU-0004: Создание таблицы NOTIFICATIONTYPE
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0004-2" author="Vladislav.Suslonov">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM NOTIFICATIONTYPE;
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="NOTIFICATIONTYPE">
+            <column name="NOTIFICATIONTYPEID" value="1"/>
+            <column name="NOTIFICATIONTYPENAME" value="Создание договора"/>
+        </insert>
+        <insert tableName="NOTIFICATIONTYPE">
+            <column name="NOTIFICATIONTYPEID" value="2"/>
+            <column name="NOTIFICATIONTYPENAME" value="Начало действия договора"/>
+        </insert>
+        <insert tableName="NOTIFICATIONTYPE">
+            <column name="NOTIFICATIONTYPEID" value="3"/>
+            <column name="NOTIFICATIONTYPENAME" value="Окончание действия договора"/>
+        </insert>
+        <insert tableName="NOTIFICATIONTYPE">
+            <column name="NOTIFICATIONTYPEID" value="4"/>
+            <column name="NOTIFICATIONTYPENAME" value="Расторжение договора"/>
+        </insert>
+        <insert tableName="NOTIFICATIONTYPE">
+            <column name="NOTIFICATIONTYPEID" value="5"/>
+            <column name="NOTIFICATIONTYPENAME" value="Оплата очередного периода"/>
+        </insert>
+        <comment>
+            CHSU-0004: заполнение таблицы NOTIFICATIONTYPE
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0004-3" author="Vladislav.Suslonov">
+        <preConditions>
+            <and>
+                <tableExists tableName="NOTIFICATION"/>
+                <tableExists tableName="NOTIFICATIONTYPE"/>
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="NOTIFICATION" baseColumnNames="EVENTCODE" constraintName="FK_NOTIFICATIONTYPE" referencedTableName="NOTIFICATIONTYPE"
+                                  referencedColumnNames="NOTIFICATIONTYPEID"/>
+        <comment>
+            CHSU-0004: создание ограничения внешнего ключа
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0004-4" author="Vladislav.Suslonov">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="PAYMENTSTATUS"/>
+                </not>
+                <tableExists tableName="PAYMENT"/>
+            </and>
+        </preConditions>
+        <createTable tableName="PAYMENTSTATUS">
+            <column name="PAYMENTSTATUSID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PAYMENTSTATUSDESCRIPTION" type="VARCHAR(32)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+        <comment>
+            CHSU-0004: новая таблица PAYMENTSTATUS
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0004-5" author="Vladislav.Suslonov">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM PAYMENTSTATUS
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="PAYMENTSTATUS">
+            <column name="PAYMENTSTATUSID" value="1"/>
+            <column name="PAYMENTSTATUSDESCRIPTION" value="Успешно оплачен"/>
+        </insert>
+        <insert tableName="PAYMENTSTATUS">
+            <column name="PAYMENTSTATUSID" value="2"/>
+            <column name="PAYMENTSTATUSDESCRIPTION" value="Ожидает оплаты"/>
+        </insert>
+        <insert tableName="PAYMENTSTATUS">
+            <column name="PAYMENTSTATUSID" value="3"/>
+            <column name="PAYMENTSTATUSDESCRIPTION" value="Неудачная попытка оплаты"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="CHSU-0004-6" author="Vladislav.Suslonov">
+        <preConditions>
+            <and>
+                <tableExists tableName="PAYMENT"/>
+                <tableExists tableName="PAYMENTSTATUS"/>
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="PAYMENT" baseColumnNames="STATUS" constraintName="FK_PAYMENTSTATUS" referencedTableName="PAYMENTSTATUS"
+                                 referencedColumnNames="PAYMENTSTATUSID"/>
+        <comment>
+            CHSU-0004: создание ограничения внешнего ключа
+        </comment>
+    </changeSet>
+
 </databaseChangeLog>
