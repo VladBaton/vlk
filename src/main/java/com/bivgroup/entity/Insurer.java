@@ -22,12 +22,8 @@ public class Insurer {
 
     private String phone;
 
-
     @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contract> contracts;
-
-    @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Notification> notifications;
 
     public Long getInsurerId() {
         return insurerId;
@@ -83,13 +79,5 @@ public class Insurer {
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
-    }
-
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
     }
 }

@@ -16,7 +16,7 @@ public interface EntityToPojoMapper {
 
 
     @Mapping(target = "contractId", expression = "java(notification.getContract().getContractId())")
-    @Mapping(target = "insurerId", expression = "java(notification.getInsurer().getInsurerId())")
+    @Mapping(target = "insurerId", expression = "java(notification.getContract().getInsurer().getInsurerId())")
     Notification toPojoNotification(com.bivgroup.entity.Notification notification);
 
 

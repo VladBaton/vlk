@@ -15,6 +15,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -81,8 +82,9 @@ public class NotificationService {
 
     public Response getNotificationsByClient(GetNotificationsByClientRequest request) {
         Insurer insurer = insurerRepository.findByInsurerId(request.getInsurerId()).orElseThrow();
-        List<Notification> notifications = insurer.getNotifications();
-        if (Objects.isNull(notifications)) {
+        List<Notification> notifications = new ArrayList<>();
+        contractRepository.findByInsurerId(request.getInsurerId()).forEach(contract -> notifications.addAll(contract.getNotifications()));
+        if (notifications.isEmpty()) {
             return formResponseService
                     .formResponse(
                             formResponseService

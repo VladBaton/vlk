@@ -18,10 +18,6 @@ public class Notification {
     @JoinColumn(name = "CONTRACTID", nullable = false)
     private Contract contract;
 
-    @ManyToOne
-    @JoinColumn(name = "INSURERID", nullable = false)
-    private Insurer insurer;
-
     private Long eventCode;
 
     private String message;
@@ -43,14 +39,6 @@ public class Notification {
 
     public void setContract(Contract contract) {
         this.contract = contract;
-    }
-
-    public Insurer getInsurer() {
-        return insurer;
-    }
-
-    public void setInsurer(Insurer insurer) {
-        this.insurer = insurer;
     }
 
     public Long getEventCode() {
