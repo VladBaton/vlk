@@ -1,0 +1,144 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="Vladislav.Suslonov" id="CHSU-0003-1">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <tableExists tableName="INSURER"/>
+                </not>
+            </and>
+        </preConditions>
+        <createTable tableName="INSURER">
+            <column name="INSURERID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(255)"/>
+            <column name="LASTNAME" type="VARCHAR(64)"/>
+            <column name="NAME" type="VARCHAR(64)"/>
+            <column name="SURNAME" type="VARCHAR(64)"/>
+            <column name="PHONE" type="VARCHAR(11)"/>
+            <column name="CREATEDATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <comment>CHSU-0003: создание таблицы INSURER</comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0003-2" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="CONTRACT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="CONTRACT">
+            <column name="CONTRACTID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="CONTRACTNUMBER" type="VARCHAR(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="STARTDATE" type="TIMESTAMP" />
+            <column name="ENDDATE" type="TIMESTAMP" />
+            <column name="SIGNDATE" type="TIMESTAMP" />
+            <column name="INSURERID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATEDATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="INSURERID"
+                                 baseTableName="CONTRACT"
+                                 constraintName="FK_INSURER"
+                                 referencedColumnNames="INSURERID"
+                                 referencedTableName="INSURER"/>
+        <comment>
+            CHSU-0003: создание таблицы CONTRACT
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0003-3" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="PAYMENT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PAYMENT">
+            <column name="PAYMENTID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="AMOUNT" type="DECIMAL(19, 2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="PAYDATE" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="STARTDATE" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="FINISHDATE" type="TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+            <column name="ORDERNUM" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="STATUS" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="CONTRACTID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="PAYMENT"
+                baseColumnNames="CONTRACTID"
+                referencedTableName="CONTRACT"
+                referencedColumnNames="CONTRACTID"
+                constraintName="FK_PAYMENT_CONTRACT"/>
+        <comment>
+            CHSU-0003: создание таблицы PAYMENT
+        </comment>
+    </changeSet>
+    
+    <changeSet id="CHSU-0003-4" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="NOTIFICATION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="NOTIFICATION">
+            <column name="NOTIFICATIONID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="CONTRACTID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="EVENTCODE" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="MESSAGE" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATEDATE" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="NOTIFICATION"
+                baseColumnNames="CONTRACTID"
+                referencedTableName="CONTRACT"
+                referencedColumnNames="CONTRACTID"
+                constraintName="FK_NOTIFICATION_CONTRACT"/>
+        <comment>
+            CHSU-0003: Создание таблицы NOTIFICATION
+        </comment>
+    </changeSet>
+
+</databaseChangeLog>
