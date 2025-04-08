@@ -25,6 +25,10 @@ public class Insurer {
     @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contract> contracts;
 
+    @OneToOne
+    @JoinColumn(name = "ACCOUNTID", referencedColumnName = "ACCOUNTID")
+    private Account account;
+
     public Long getInsurerId() {
         return insurerId;
     }
@@ -79,5 +83,13 @@ public class Insurer {
 
     public void setContracts(List<Contract> contracts) {
         this.contracts = contracts;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
