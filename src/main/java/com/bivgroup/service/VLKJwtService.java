@@ -1,6 +1,10 @@
 package com.bivgroup.service;
 
+import com.bivgroup.entity.Account;
+import com.bivgroup.pojo.request.AuthorizationRequest;
+import com.bivgroup.repository.AccountRepository;
 import io.smallrye.jwt.build.Jwt;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 import java.nio.file.Files;
@@ -14,6 +18,9 @@ import java.util.Set;
 
 @Singleton
 public class VLKJwtService {
+
+    @Inject
+    AccountRepository accountRepository;
 
     private PrivateKey privateKey;
 
@@ -29,9 +36,10 @@ public class VLKJwtService {
         this.privateKey = keyFactory.generatePrivate(keySpec);
     }
 
-    public String generateJwt() {
+    public String generateJwt(AuthorizationRequest request) {
         Set<String> roles = new HashSet<>();
-        roles.add("admin");
+        Account account = accountRepository.findByLogin(request.getUserLogin()).orElseThrow();
+        roles.add(account.getRole());
         return Jwt.issuer("vlk-jwt")
                 .subject("vlk-jwt")
                 .groups(roles)
