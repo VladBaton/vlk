@@ -1,2 +1,4 @@
 include::changelog/CHSU-0003.adoc[]
 include::changelog/CHSU-0004.adoc[]
+include::changelog/CHSU-0005.adoc[]
+
