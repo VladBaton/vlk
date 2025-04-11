@@ -264,4 +264,54 @@
         </comment>
     </changeSet>
 
+    <changeSet id="CHSU-0005-1" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="ACCOUNT"/> 
+            </not>
+        </preConditions>
+        <createTable tableName="ACCOUNT">
+            <column name="ACCOUNTID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="login" type="VARCHAR(128)"/>
+            <column name="password"  type="VARCHAR(60)"/>
+            <column name="role" type="VARCHAR(6)"/>
+        </createTable>
+        <comment>
+            CHSU-0005: создание таблицы Account
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0005-2" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <columnExists tableName="INSURER" columnName="ACCOUNTID"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="INSURER">
+            <column name="ACCOUNTID" type="BIGINT">
+                <constraints unique="true"/>
+            </column>
+        </addColumn>
+        <comment>
+            CHSU-0005: Добавление столбца внешнего ключа в INSURER
+        </comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0005-3" author="Vladislav.Suslonov">
+        <preConditions>
+            <and>
+                <tableExists tableName="INSURER"/>
+                <tableExists tableName="ACCOUNT"/>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyName="FK_INSURER_ACCOUNT"/>
+                </not>
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="INSURER" baseColumnNames="ACCOUNTID"
+                                 constraintName="FK_INSURER_ACCOUNT" referencedTableName="ACCOUNT"
+                                 referencedColumnNames="ACCOUNTID"/>
+    </changeSet>
+
 </databaseChangeLog>
