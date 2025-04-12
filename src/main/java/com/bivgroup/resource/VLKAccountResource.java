@@ -3,6 +3,7 @@ package com.bivgroup.resource;
 import com.bivgroup.exception.HandledServiceException;
 import com.bivgroup.pojo.request.AuthorizationRequest;
 import com.bivgroup.pojo.request.CreateAccountRequest;
+import com.bivgroup.pojo.response.AuthorizationResponse;
 import com.bivgroup.service.AccountService;
 import com.bivgroup.service.VLKJwtService;
 import jakarta.annotation.security.PermitAll;
@@ -28,12 +29,12 @@ public class VLKAccountResource {
     @POST
     @Path("authorize")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
     public Response authorize(AuthorizationRequest request) throws HandledServiceException {
         inputValidator.validateAuthorizationRequest(request);
-        String jwt = vlkJwtService.generateJwt(request);
-        return Response.ok(jwt).build();
+        AuthorizationResponse response = vlkJwtService.generateJwt(request);
+        return Response.ok(response).build();
     }
 
     @POST

@@ -2,6 +2,7 @@ package com.bivgroup.service;
 
 import com.bivgroup.entity.Account;
 import com.bivgroup.pojo.request.AuthorizationRequest;
+import com.bivgroup.pojo.response.AuthorizationResponse;
 import com.bivgroup.repository.AccountRepository;
 import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
@@ -36,14 +37,19 @@ public class VLKJwtService {
         this.privateKey = keyFactory.generatePrivate(keySpec);
     }
 
-    public String generateJwt(AuthorizationRequest request) {
+    public AuthorizationResponse generateJwt(AuthorizationRequest request) {
         Set<String> roles = new HashSet<>();
         Account account = accountRepository.findByLogin(request.getUserLogin()).orElseThrow();
         roles.add(account.getRole());
-        return Jwt.issuer("vlk-jwt")
+        AuthorizationResponse response =  new AuthorizationResponse(account.getInsurer().getInsurerId(),
+                Jwt.issuer("vlk-jwt")
                 .subject("vlk-jwt")
                 .groups(roles)
                 .expiresAt(System.currentTimeMillis() + 3600)
-                .sign(privateKey);
+                .sign(privateKey)
+        );
+        response.setStatusCode(0L);
+        response.setStatusDescription("Обработан успешно");
+        return response;
     }
 }

@@ -7,5 +7,11 @@ import lombok.Setter;
 @Setter
 public class AuthorizationResponse extends BaseResponse {
 
-    private Boolean authorizationRes;
+    private Long insurerId;
+    private String token;
+
+    public AuthorizationResponse(Long insurerId, String token) {
+        this.insurerId = insurerId;
+        this.token = token;
+    }
 }
