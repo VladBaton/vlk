@@ -35,10 +35,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="PRODUCTID" type="BIGINT"/>
-            <column name="FIELDNAME" type="varchar(64)"/>
-            <column name="FIELDSYSNAME" type="varchar(64)">
-                <constraints unique="true" nullable="false"/>
+            <column name="FIELDNAME" type="varchar(64)">
+                <constraints nullable="false"/>
             </column>
+            <column name="FIELDSYSNAME" type="varchar(64)"/>
             <column name="FIELDDESCRIPTION" type="varchar(128)"/>
         </createTable>
         <addForeignKeyConstraint baseTableName="PRODUCTDESCRIPTION"
@@ -110,6 +110,16 @@
                                  constraintName="FK_CONTRACTEXTENSION_CONTRACTID"
                                  referencedTableName="CONTRACT"
                                  referencedColumnNames="CONTRACTID"/>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-6" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM PRODUCT
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="sql/CHSU-0007-handbook.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
 </databaseChangeLog>
