@@ -11,6 +11,7 @@ import com.bivgroup.pojo.request.GetNotificationsByPeriodRequest;
 import com.bivgroup.repository.ContractRepository;
 import com.bivgroup.repository.InsurerRepository;
 import com.bivgroup.repository.NotificationRepository;
+import com.bivgroup.repository.PaymentRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
@@ -34,6 +35,9 @@ public class NotificationService {
 
     @Inject
     FormResponseService formResponseService;
+
+    @Inject
+    PaymentRepository paymentRepository;
 
     public Response getNotificationsByContractNumber(GetNotificationsByContractNumberRequest request) {
         Contract contract = contractRepository.findByContractNumber(request.getContractNumber()).orElseThrow();

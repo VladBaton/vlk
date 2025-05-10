@@ -1,0 +1,48 @@
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-04-22T18:53:03.600Z" version="23.1.5" etag="y0v5kE1c8OBLW3lH2Fb4" type="embed" pages="2">
+  <diagram name="Исходная диаграмма классов" id="m5qkEpZLX-l9cLjTujLx">
+    <mxGraphModel dx="462" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PgMF2JB4czHhSfsZ3lgZ-1" value="Constants" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="190" y="240" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="PgMF2JB4czHhSfsZ3lgZ-3" value="URL" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="320" y="240" width="110" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="6JaAvCqgcB9OMM72ptCn" name="Детальная диаграмма классов">
+    <mxGraphModel dx="462" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="C_0A52ujSGiheqEYOJf3-4" value="Constants" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="180" y="280" width="180" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-5" value="+ DATE_PATTERN_TIME: String&lt;div&gt;+ SUCCESSFULLY_&lt;/div&gt;&lt;div&gt;PROCESSED_STATUS:&lt;/div&gt;&lt;div&gt;String&lt;/div&gt;&lt;div&gt;+ FOOTER_TEXT: String&lt;/div&gt;&lt;div&gt;+ SUCCESS_STATUS_CODE: Long&lt;/div&gt;&lt;div&gt;+ RQ_ID: String&lt;div&gt;+ RQ_TM: String&lt;/div&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="C_0A52ujSGiheqEYOJf3-4" vertex="1">
+          <mxGeometry y="26" width="180" height="174" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="C_0A52ujSGiheqEYOJf3-4" vertex="1">
+          <mxGeometry y="200" width="180" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-7" value="- Constants()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="C_0A52ujSGiheqEYOJf3-4" vertex="1">
+          <mxGeometry y="208" width="180" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-12" value="URL" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="410" y="260" width="180" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-13" value="+ AUTHORIZATION_URL: String&lt;div&gt;+ CREATE_ACCOUNT_URL: String&lt;/div&gt;&lt;div&gt;+ GET_USER_DATA_URL: String&lt;/div&gt;&lt;div&gt;+ GET_NOTIFICATIONS_BY_&lt;/div&gt;&lt;div&gt;CONTRACT_NUMBER_URL: String&lt;/div&gt;&lt;div&gt;+ GET_NOTIFICATIONS_BY_&lt;/div&gt;&lt;div&gt;INSURER_ID_URL: String&lt;/div&gt;&lt;div&gt;+ GET_NOTIFICATIONS_BY_&lt;/div&gt;&lt;div&gt;PERIOD_URL: String&lt;/div&gt;&lt;div&gt;+ UPDATE_ACCOUNT_URL:&lt;/div&gt;&lt;div&gt;String&lt;/div&gt;&lt;div&gt;+ DISABLE_ACCOUNT_URL:&lt;/div&gt;&lt;div&gt;String&lt;/div&gt;&lt;div&gt;+ENABLE_ACCOUNT_URL:&lt;/div&gt;&lt;div&gt;String&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="C_0A52ujSGiheqEYOJf3-12" vertex="1">
+          <mxGeometry y="26" width="180" height="284" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-14" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="C_0A52ujSGiheqEYOJf3-12" vertex="1">
+          <mxGeometry y="310" width="180" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="C_0A52ujSGiheqEYOJf3-15" value="- URL()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="C_0A52ujSGiheqEYOJf3-12" vertex="1">
+          <mxGeometry y="318" width="180" height="32" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
