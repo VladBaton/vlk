@@ -11,4 +11,10 @@
     <include file="create-tables.xml" relativeToChangelogFile="true"/>
     <include file="triggers.xml" relativeToChangelogFile="true"/>
 
+    <changeSet id="add-tag-1.0.1" author="Vladislav.Suslonov">
+        <tagDatabase tag="v.1.0.1"/>
+    </changeSet>
+
+    <include file="create-tables-2.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
