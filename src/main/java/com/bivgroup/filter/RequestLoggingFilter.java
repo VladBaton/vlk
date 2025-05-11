@@ -1,7 +1,6 @@
 package com.bivgroup.filter;
 
-import com.bivgroup.constant.FieldName;
-import com.bivgroup.mapper.BaseResponseMapper;
+import com.bivgroup.constant.Constants;
 import com.bivgroup.pojo.request.BaseRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -46,18 +45,18 @@ public class RequestLoggingFilter implements ContainerRequestFilter {
         JsonNode jsonNode = objectMapper.readTree(requestBody);
         Map<String, String> resultMap = new HashMap<>();
 
-        Optional<JsonNode> rqIdNodeOptional = Optional.ofNullable(jsonNode.get(FieldName.RQ_ID));
-        Optional<JsonNode> rqTmNodeOptional = Optional.ofNullable(jsonNode.get(FieldName.RQ_TM));
-        rqIdNodeOptional.ifPresent(rqIdNode -> resultMap.put(FieldName.RQ_ID, rqIdNode.asText("")));
-        rqTmNodeOptional.ifPresent(rqTmNode -> resultMap.put(FieldName.RQ_TM, rqTmNode.asText("")));
+        Optional<JsonNode> rqIdNodeOptional = Optional.ofNullable(jsonNode.get(Constants.FieldName.RQ_ID));
+        Optional<JsonNode> rqTmNodeOptional = Optional.ofNullable(jsonNode.get(Constants.FieldName.RQ_TM));
+        rqIdNodeOptional.ifPresent(rqIdNode -> resultMap.put(Constants.FieldName.RQ_ID, rqIdNode.asText("")));
+        rqTmNodeOptional.ifPresent(rqTmNode -> resultMap.put(Constants.FieldName.RQ_TM, rqTmNode.asText("")));
 
         return resultMap;
     }
 
     private BaseRequest createBaseRequest(Map<String, String> argumentsMap) {
         BaseRequest baseRequest = new BaseRequest();
-        baseRequest.setRqId(argumentsMap.get(FieldName.RQ_ID));
-        baseRequest.setRqTm(argumentsMap.get(FieldName.RQ_TM));
+        baseRequest.setRqId(argumentsMap.get(Constants.FieldName.RQ_ID));
+        baseRequest.setRqTm(argumentsMap.get(Constants.FieldName.RQ_TM));
         return baseRequest;
     }
 }

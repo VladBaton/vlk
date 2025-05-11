@@ -5,6 +5,8 @@ import com.bivgroup.pojo.Contract;
 import com.bivgroup.pojo.Notification;
 import com.bivgroup.pojo.Payment;
 import com.bivgroup.pojo.response.GetUserDataResponse;
+import com.bivgroup.service.HandbookService;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -25,7 +27,8 @@ public interface EntityToPojoMapper {
     @Mapping(target = "payments", expression = "java(" +
             "contract.getPayments().stream().map(payment -> EntityToPojoMapper.INSTANCE.toPaymentPojo(payment)).collect(java.util.stream.Collectors.toList())" +
             ")")
-    Contract toContractPojo(com.bivgroup.entity.Contract contract);
+    @Mapping(target = "contractExt", expression = "java(handbookService.getContractExtensionMap(contract))")
+    Contract toContractPojo(com.bivgroup.entity.Contract contract, @Context HandbookService handbookService);
 
     @Mapping(target = "insurerName", expression = "java(insurer.getName())")
     @Mapping(target = "insurerSurname", expression = "java(insurer.getSurname())")
@@ -33,7 +36,7 @@ public interface EntityToPojoMapper {
     @Mapping(target = "insurerEmail", expression = "java(insurer.getEmail())")
     @Mapping(target = "insurerPhoneNumber", expression = "java(insurer.getPhone())")
     @Mapping(target = "contracts", expression = "java(" +
-            "insurer.getContracts().stream().map(contract -> EntityToPojoMapper.INSTANCE.toContractPojo(contract)).collect(java.util.stream.Collectors.toList())" +
+            "insurer.getContracts().stream().map(contract -> EntityToPojoMapper.INSTANCE.toContractPojo(contract, handbookService)).collect(java.util.stream.Collectors.toList())" +
             ")")
-    com.bivgroup.pojo.Insurer toInsurerPojo(Insurer insurer);
+    com.bivgroup.pojo.Insurer toInsurerPojo(Insurer insurer, @Context HandbookService handbookService);
 }

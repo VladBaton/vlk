@@ -122,4 +122,13 @@
         <sqlFile path="sql/CHSU-0007-handbook.sql" relativeToChangelogFile="true"/>
     </changeSet>
 
+    <changeSet id="CHSU-0007-7" author="Vladislav.Suslonov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="PRODUCT" columnName="PRODUCTSYSNAME"/>
+            </not>
+        </preConditions>
+        <renameColumn tableName="PRODUCT" oldColumnName="productSysName" newColumnName="PRODUCTSYSNAME"/>
+    </changeSet>
+
 </databaseChangeLog>

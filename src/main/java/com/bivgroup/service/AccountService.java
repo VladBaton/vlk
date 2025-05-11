@@ -33,6 +33,9 @@ public class AccountService {
     @Inject
     FormResponseService formResponseService;
 
+    @Inject
+    HandbookService handbookService;
+
     @Transactional
     public Response createAccount(CreateAccountRequest request) {
         Contract contract = contractRepository.findByContractNumber(request.getContractNumber()).orElseThrow();
@@ -62,7 +65,7 @@ public class AccountService {
                                         request,
                                         EntityToPojoMapper
                                                 .INSTANCE
-                                                .toInsurerPojo(insurer),
+                                                .toInsurerPojo(insurer, handbookService),
                                         0L,
                                         Constants.SUCCESSFULLY_PROCESSED_STATUS
                                 )
