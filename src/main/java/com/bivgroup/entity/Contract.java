@@ -32,6 +32,13 @@ public class Contract extends PanacheEntityBase {
     @JoinColumn(name = "INSURERID")
     private Insurer insurer;
 
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
+
+    @OneToOne(mappedBy = "contract", cascade = CascadeType.ALL)
+    private ContractExtension contractExtension;
+
     public Long getContractId() {
         return contractId;
     }
@@ -94,5 +101,21 @@ public class Contract extends PanacheEntityBase {
 
     public void setInsurer(Insurer insurer) {
         this.insurer = insurer;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public ContractExtension getContractExtension() {
+        return contractExtension;
+    }
+
+    public void setContractExtension(ContractExtension contractExtension) {
+        this.contractExtension = contractExtension;
     }
 }
