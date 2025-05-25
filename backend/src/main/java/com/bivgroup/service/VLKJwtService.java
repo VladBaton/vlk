@@ -27,7 +27,7 @@ public class VLKJwtService {
 
     public VLKJwtService() throws Exception {
         // Загрузка приватного ключа из файла
-        String privateKeyPEM = new String(Files.readAllBytes(Paths.get("C:\\Users\\User\\Desktop\\BIV\\user-service\\vlk\\src\\main\\resources\\privateKey.pem")));
+        String privateKeyPEM = new String(Files.readAllBytes(Paths.get("C:\\Users\\User\\Desktop\\BIV\\user-service\\vlk\\backend\\src\\main\\resources\\privateKey.pem")));
         privateKeyPEM = privateKeyPEM.replace("-----BEGIN PRIVATE KEY-----", "")
                 .replace("-----END PRIVATE KEY-----", "")
                 .replaceAll("\\s+", "");
