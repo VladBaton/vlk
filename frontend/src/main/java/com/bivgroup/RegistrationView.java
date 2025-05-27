@@ -2,7 +2,7 @@ package com.bivgroup;
 
 import com.bivgroup.pojo.request.CreateAccountRequest;
 import com.bivgroup.pojo.response.CreateAccountResponse;
-import com.bivgroup.rest.BaseRestConnection;
+import com.bivgroup.utils.RestConnectionUtils;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
@@ -19,12 +19,12 @@ import java.util.UUID;
 
 import static com.bivgroup.constant.Constants.FOOTER_TEXT;
 import static com.bivgroup.constant.Constants.SUCCESS_STATUS_CODE;
-import static com.bivgroup.constant.URL.CREATE_ACCOUNT_URL;
+import static com.bivgroup.constant.Constants.URL.CREATE_ACCOUNT_URL;
 
 @Route("registration")
 public class RegistrationView extends VerticalLayout {
 
-    private final BaseRestConnection restConnection = new BaseRestConnection();
+    private final RestConnectionUtils restConnection = new RestConnectionUtils();
 
     public RegistrationView() {
         // Заголовок

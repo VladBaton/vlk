@@ -1,6 +1,5 @@
 package com.bivgroup;
 
-import com.bivgroup.rest.BaseRestConnection;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;

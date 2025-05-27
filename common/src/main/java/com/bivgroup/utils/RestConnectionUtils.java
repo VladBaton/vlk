@@ -1,7 +1,6 @@
-package com.bivgroup.rest;
+package com.bivgroup.utils;
 
 import com.bivgroup.pojo.request.BaseRequest;
-import com.bivgroup.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -12,7 +11,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-public class BaseRestConnection {
+public class RestConnectionUtils {
 
     /**
      * Отправка POST-запроса

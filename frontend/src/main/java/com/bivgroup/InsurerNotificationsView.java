@@ -1,13 +1,11 @@
 package com.bivgroup;
 
 import com.bivgroup.pojo.Contract;
-import com.bivgroup.pojo.Payment;
-import com.bivgroup.pojo.request.GetNotificationsByClientRequest;
 import com.bivgroup.pojo.request.GetNotificationsByContractNumberRequest;
 import com.bivgroup.pojo.request.GetUserDataRequest;
 import com.bivgroup.pojo.response.GetUserDataResponse;
 import com.bivgroup.pojo.response.NotificationResponse;
-import com.bivgroup.rest.BaseRestConnection;
+import com.bivgroup.utils.RestConnectionUtils;
 import com.bivgroup.utils.SessionUtils;
 import com.bivgroup.utils.Utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,12 +32,12 @@ import java.util.UUID;
 
 import static com.bivgroup.constant.Constants.FOOTER_TEXT;
 import static com.bivgroup.constant.Constants.SUCCESS_STATUS_CODE;
-import static com.bivgroup.constant.URL.*;
+import static com.bivgroup.constant.Constants.URL.*;
 
 @Route("insurerNotifications")
 public class InsurerNotificationsView extends VerticalLayout implements BeforeEnterObserver {
 
-    private final BaseRestConnection restConnection = new BaseRestConnection();
+    private final RestConnectionUtils restConnection = new RestConnectionUtils();
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {

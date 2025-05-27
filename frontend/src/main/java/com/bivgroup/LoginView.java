@@ -2,7 +2,7 @@ package com.bivgroup;
 
 import com.bivgroup.pojo.request.AuthorizationRequest;
 import com.bivgroup.pojo.response.AuthorizationResponse;
-import com.bivgroup.rest.BaseRestConnection;
+import com.bivgroup.utils.RestConnectionUtils;
 import com.bivgroup.utils.SessionUtils;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -20,12 +20,12 @@ import java.util.UUID;
 
 import static com.bivgroup.constant.Constants.FOOTER_TEXT;
 import static com.bivgroup.constant.Constants.SUCCESS_STATUS_CODE;
-import static com.bivgroup.constant.URL.AUTHORIZATION_URL;
+import static com.bivgroup.constant.Constants.URL.AUTHORIZATION_URL;
 
 @Route("login")
 public class LoginView extends VerticalLayout {
 
-    private final BaseRestConnection restConnection = new BaseRestConnection();
+    private final RestConnectionUtils restConnection = new RestConnectionUtils();
 
     public LoginView() {
         // Заголовок

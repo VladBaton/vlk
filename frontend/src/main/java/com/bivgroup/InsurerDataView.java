@@ -5,10 +5,9 @@ import com.bivgroup.pojo.HandbookValue;
 import com.bivgroup.pojo.Payment;
 import com.bivgroup.pojo.request.GetUserDataRequest;
 import com.bivgroup.pojo.response.GetUserDataResponse;
-import com.bivgroup.rest.BaseRestConnection;
+import com.bivgroup.utils.RestConnectionUtils;
 import com.bivgroup.utils.SessionUtils;
 import com.bivgroup.utils.Utils;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
@@ -28,12 +27,12 @@ import java.util.*;
 
 import static com.bivgroup.constant.Constants.FOOTER_TEXT;
 import static com.bivgroup.constant.Constants.SUCCESS_STATUS_CODE;
-import static com.bivgroup.constant.URL.GET_USER_DATA_URL;
+import static com.bivgroup.constant.Constants.URL.GET_USER_DATA_URL;
 
 @Route("insurerData")
 public class InsurerDataView extends VerticalLayout implements BeforeEnterObserver {
 
-    private final BaseRestConnection restConnection = new BaseRestConnection();
+    private final RestConnectionUtils restConnection = new RestConnectionUtils();
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
