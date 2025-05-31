@@ -21,7 +21,10 @@ public class Account extends PanacheEntityBase {
     @Column(name = "ROLE")
     private String role;
 
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    @Column(name = "ISACTIVE")
+    private Boolean isActive;
+
+    @OneToOne(mappedBy = "account", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Insurer insurer;
 
     public Long getAccountId() {
@@ -62,5 +65,13 @@ public class Account extends PanacheEntityBase {
 
     public void setInsurer(Insurer insurer) {
         this.insurer = insurer;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean active) {
+        isActive = active;
     }
 }

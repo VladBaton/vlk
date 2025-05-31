@@ -1,12 +1,13 @@
 package com.bivgroup.resource;
 
 import com.bivgroup.exception.HandledServiceException;
-import com.bivgroup.pojo.request.AuthorizationRequest;
-import com.bivgroup.pojo.request.CreateAccountRequest;
+import com.bivgroup.pojo.request.*;
 import com.bivgroup.pojo.response.AuthorizationResponse;
 import com.bivgroup.service.AccountService;
+import com.bivgroup.service.FormResponseService;
 import com.bivgroup.service.VLKJwtService;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -25,6 +26,9 @@ public class VLKAccountResource {
 
     @Inject
     AccountService accountService;
+
+    @Inject
+    FormResponseService formResponseService;
 
     @POST
     @Path("authorize")
@@ -45,5 +49,33 @@ public class VLKAccountResource {
     public Response createAccount(CreateAccountRequest request) throws HandledServiceException {
         inputValidator.validateCreateAccountRequest(request);
         return accountService.createAccount(request);
+    }
+
+    @POST
+    @Path("delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"user", "admin"})
+    public Response deleteAccount(DeleteAccountRequest request) throws HandledServiceException {
+        inputValidator.validateDeleteAccountRequest(request);
+        return accountService.deleteAccount(request);
+    }
+
+    @POST
+    @Path("disable")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
+    public Response disableAccounts(DisableAccountsRequest request) {
+        return accountService.disableAccounts(request);
+    }
+
+    @POST
+    @Path("enable")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin"})
+    public Response enableAccounts(EnableAccountsRequest request) {
+        return accountService.enableAccounts(request);
     }
 }

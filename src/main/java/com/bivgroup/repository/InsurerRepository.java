@@ -14,4 +14,8 @@ public class InsurerRepository implements PanacheRepository<Insurer> {
     public Optional<Insurer> findByInsurerId(Long insurerId) {
         return findByIdOptional(insurerId);
     }
+
+    public Optional<Insurer> findByLogin(String login) {
+        return find("account.login=?1", login).firstResultOptional();
+    }
 }

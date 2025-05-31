@@ -131,4 +131,18 @@
         <renameColumn tableName="PRODUCT" oldColumnName="productSysName" newColumnName="PRODUCTSYSNAME"/>
     </changeSet>
 
+    <changeSet id="CHSU-0009-1" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <not>
+                <columnExists tableName="ACCOUNT" columnName="ISACTIVE"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="ACCOUNT">
+            <column name="ISACTIVE" type="BOOLEAN" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <comment>CHSU-0009: добавление столбца isActive в таблицу Account</comment>
+    </changeSet>
+
 </databaseChangeLog>
