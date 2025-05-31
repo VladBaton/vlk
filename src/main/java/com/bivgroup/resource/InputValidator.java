@@ -85,10 +85,18 @@ public class InputValidator {
                         "Неверный логин или пароль"
                 )
         );
+
         if (!BCrypt.checkpw(request.getPassword(), account.getPassword())) {
             throw new HandledServiceException(
                     4L,
                     "Неверный логин или пароль"
+            );
+        }
+
+        if (!account.getIsActive()) {
+            throw new HandledServiceException(
+                    5L,
+                    "Аккаунт неактивен"
             );
         }
     }

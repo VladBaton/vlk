@@ -6,10 +6,7 @@ import com.bivgroup.entity.Contract;
 import com.bivgroup.entity.Insurer;
 import com.bivgroup.mapper.BaseResponseMapper;
 import com.bivgroup.mapper.EntityToPojoMapper;
-import com.bivgroup.pojo.request.CreateAccountRequest;
-import com.bivgroup.pojo.request.DeleteAccountRequest;
-import com.bivgroup.pojo.request.GetUserDataRequest;
-import com.bivgroup.pojo.request.UpdateAccountRequest;
+import com.bivgroup.pojo.request.*;
 import com.bivgroup.repository.AccountRepository;
 import com.bivgroup.repository.ContractRepository;
 import com.bivgroup.repository.InsurerRepository;
@@ -18,6 +15,8 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.util.Objects;
 
 @ApplicationScoped
 public class AccountService {
@@ -85,6 +84,39 @@ public class AccountService {
         return Response
                 .ok(formResponseService.formBaseResponse(request, 0L, "Аккаунт удалён"))
                 .build();
+    }
+
+    public Response disableAccounts(DisableAccountsRequest request) {
+        for (Long id: request.getAccountIds()) {
+            try {
+                setIsActiveValue(id, false);
+            } catch (Exception ignored) {
+            }
+        }
+        return Response
+                .ok(formResponseService.formBaseResponse(request, 0L, "Обработан успешно"))
+                .build();
+    }
+
+    public Response enableAccounts(EnableAccountsRequest request) {
+        for (Long id: request.getAccountIds()) {
+            try {
+                setIsActiveValue(id, true);
+            } catch (Exception ignored) {
+            }
+        }
+        return Response
+                .ok(formResponseService.formBaseResponse(request, 0L, "Обработан успешно"))
+                .build();
+    }
+
+    @Transactional
+    public void setIsActiveValue(Long accountId, boolean isActive) {
+        Account account = accountRepository.findById(accountId);
+        if (Objects.isNull(account)) {
+            return;
+        }
+        account.setIsActive(isActive);
     }
 
     private Account createAccountFromRequest(CreateAccountRequest request) {
