@@ -2,12 +2,9 @@ package com.bivgroup.service;
 
 import com.bivgroup.mapper.BaseResponseMapper;
 import com.bivgroup.mapper.NotificationMapper;
-import com.bivgroup.pojo.Insurer;
 import com.bivgroup.pojo.Notification;
 import com.bivgroup.pojo.request.BaseRequest;
-import com.bivgroup.pojo.request.GetUserDataRequest;
 import com.bivgroup.pojo.response.BaseResponse;
-import com.bivgroup.pojo.response.GetUserDataResponse;
 import com.bivgroup.pojo.response.NotificationResponse;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.Response;

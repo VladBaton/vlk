@@ -1,0 +1,134 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="CHSU-0007-1" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="product"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PRODUCT">
+            <column name="PRODUCTID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="productSysName" type="VARCHAR(64)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+        <comment>CHSU-0007: создание таблицы PRODUCT</comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-2" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="PRODUCTDESCRIPTION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PRODUCTDESCRIPTION">
+            <column name="PRODUCTDESCRIPTIONID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PRODUCTID" type="BIGINT"/>
+            <column name="FIELDNAME" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIELDSYSNAME" type="varchar(64)"/>
+            <column name="FIELDDESCRIPTION" type="varchar(128)"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="PRODUCTDESCRIPTION"
+                                 baseColumnNames="PRODUCTID"
+                                 constraintName="FK_PRODDESCR_PRODUCT_ID"
+                                 referencedTableName="PRODUCT"
+                                 referencedColumnNames="PRODUCTID"/>
+        <comment>CHSU-0007: Создание таблицы productDescription</comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-3" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <columnExists tableName="CONTRACT" columnName="PRODUCTID"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="CONTRACT">
+            <column name="PRODUCTID" type="BIGINT"/>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="CONTRACT"
+                                 baseColumnNames="PRODUCTID"
+                                 constraintName="FK_CONTRACT_PRODUCT_ID"
+                                 referencedTableName="PRODUCT"
+                                 referencedColumnNames="PRODUCTID"/>
+        <comment>CHSU-0007: добавление внешнего ключа productId в таблицу contract</comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-4" author="Vladislav.Suslonov">
+        <preConditions>
+            <not>
+                <tableExists tableName="CONTRACTEXTENSION"/>
+            </not>
+        </preConditions>
+        <createTable tableName="CONTRACTEXTENSION">
+            <column name="CONTRACTID" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="DOUBLEFIELD01" type="DOUBLE PRECISION"/>
+            <column name="DOUBLEFIELD02" type="DOUBLE PRECISION"/>
+            <column name="DOUBLEFIELD03" type="DOUBLE PRECISION"/>
+            <column name="DOUBLEFIELD04" type="DOUBLE PRECISION"/>
+            <column name="DOUBLEFIELD05" type="DOUBLE PRECISION"/>
+            <column name="LONGFIELD01" type="BIGINT"/>
+            <column name="LONGFIELD02" type="BIGINT"/>
+            <column name="LONGFIELD03" type="BIGINT"/>
+            <column name="LONGFIELD04" type="BIGINT"/>
+            <column name="LONGFIELD05" type="BIGINT"/>
+            <column name="STRINGFIELD01" type="VARCHAR(255)"/>
+            <column name="STRINGFIELD02" type="VARCHAR(255)"/>
+            <column name="STRINGFIELD03" type="VARCHAR(255)"/>
+            <column name="STRINGFIELD04" type="VARCHAR(255)"/>
+            <column name="STRINGFIELD05" type="VARCHAR(255)"/>
+        </createTable>
+        <comment>CHSU-0007: добавление таблицы contractExtension</comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-5" author="Vladislav.Suslonov">
+        <preConditions>
+            <and>
+                <tableExists tableName="CONTRACT"/>
+                <tableExists tableName="CONTRACTEXTENSION"/>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyName="FK_CONTRACTEXTENSION_CONTRACTID"/>
+                </not>
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="CONTRACTEXTENSION"
+                                 baseColumnNames="CONTRACTID"
+                                 constraintName="FK_CONTRACTEXTENSION_CONTRACTID"
+                                 referencedTableName="CONTRACT"
+                                 referencedColumnNames="CONTRACTID"/>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-6" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*)
+                FROM PRODUCT
+            </sqlCheck>
+        </preConditions>
+        <sqlFile path="sql/CHSU-0007-handbook.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="CHSU-0007-7" author="Vladislav.Suslonov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="PRODUCT" columnName="PRODUCTSYSNAME"/>
+            </not>
+        </preConditions>
+        <renameColumn tableName="PRODUCT" oldColumnName="productSysName" newColumnName="PRODUCTSYSNAME"/>
+    </changeSet>
+
+</databaseChangeLog>
