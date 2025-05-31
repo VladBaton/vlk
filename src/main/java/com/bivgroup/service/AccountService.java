@@ -80,6 +80,7 @@ public class AccountService {
         Insurer insurer = insurerRepository.findByLogin(request.getLogin()).orElseThrow();
         accountRepository.delete(insurer.getAccount());
         insurer.setAccount(null);
+        insurerRepository.getEntityManager().merge(insurer);
 
         return Response
                 .ok(formResponseService.formBaseResponse(request, 0L, "Аккаунт удалён"))
