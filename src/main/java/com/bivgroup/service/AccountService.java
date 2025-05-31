@@ -7,6 +7,7 @@ import com.bivgroup.entity.Insurer;
 import com.bivgroup.mapper.BaseResponseMapper;
 import com.bivgroup.mapper.EntityToPojoMapper;
 import com.bivgroup.pojo.request.CreateAccountRequest;
+import com.bivgroup.pojo.request.DeleteAccountRequest;
 import com.bivgroup.pojo.request.GetUserDataRequest;
 import com.bivgroup.pojo.request.UpdateAccountRequest;
 import com.bivgroup.repository.AccountRepository;
@@ -70,6 +71,18 @@ public class AccountService {
                                         Constants.SUCCESSFULLY_PROCESSED_STATUS
                                 )
                 )
+                .build();
+    }
+
+    @Transactional
+    public Response deleteAccount(DeleteAccountRequest request) {
+
+        Insurer insurer = insurerRepository.findByLogin(request.getLogin()).orElseThrow();
+        insurer.getAccount().delete();
+        insurer.setAccount(null);
+
+        return Response
+                .ok(formResponseService.formBaseResponse(request, 0L, "Пароль сброшен"))
                 .build();
     }
 

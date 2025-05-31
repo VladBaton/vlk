@@ -3,10 +3,12 @@ package com.bivgroup.resource;
 import com.bivgroup.exception.HandledServiceException;
 import com.bivgroup.pojo.request.AuthorizationRequest;
 import com.bivgroup.pojo.request.CreateAccountRequest;
+import com.bivgroup.pojo.request.DeleteAccountRequest;
 import com.bivgroup.pojo.response.AuthorizationResponse;
 import com.bivgroup.service.AccountService;
 import com.bivgroup.service.VLKJwtService;
 import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -45,5 +47,15 @@ public class VLKAccountResource {
     public Response createAccount(CreateAccountRequest request) throws HandledServiceException {
         inputValidator.validateCreateAccountRequest(request);
         return accountService.createAccount(request);
+    }
+
+    @POST
+    @Path("delete")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"user", "admin"})
+    public Response deleteAccount(DeleteAccountRequest request) throws HandledServiceException {
+        inputValidator.validateDeleteAccountRequest(request);
+        return accountService.deleteAccount(request);
     }
 }

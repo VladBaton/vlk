@@ -92,4 +92,13 @@ public class InputValidator {
             );
         }
     }
+
+    public void validateDeleteAccountRequest(@Valid DeleteAccountRequest request) throws HandledServiceException {
+        Account account = accountRepository.findByLogin(request.getLogin()).orElseThrow(() ->
+                new HandledServiceException(
+                        4L,
+                        "Неверный логин или пароль"
+                )
+        );
+    }
 }
