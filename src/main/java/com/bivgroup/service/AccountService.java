@@ -5,6 +5,7 @@ import com.bivgroup.entity.Account;
 import com.bivgroup.entity.Contract;
 import com.bivgroup.entity.Insurer;
 import com.bivgroup.entity.VerificationCode;
+import com.bivgroup.exception.HandledServiceException;
 import com.bivgroup.mapper.BaseResponseMapper;
 import com.bivgroup.mapper.EntityToPojoMapper;
 import com.bivgroup.pojo.request.*;
@@ -15,11 +16,13 @@ import com.bivgroup.repository.VerificationCodeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.core.Response;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -60,6 +63,21 @@ public class AccountService {
         return Response
                 .ok(formResponseService.formBaseResponse(request, 0L, "Проверочный код успешно создан"))
                 .build();
+    }
+
+    public Response validateVerificationCode(@Valid ValidateVerificationCodeRequest request) throws HandledServiceException {
+
+        Contract contract = contractRepository.findByContractNumber(request.getContractNumber())
+                .orElseThrow(() -> new HandledServiceException(5L, String.format("Контракт с номером %s не найден", request.getContractNumber())));
+
+        Optional<VerificationCode> verificationCode = verificationCodeRepository
+                .findActiveVerificationCodeByInsurerId(contract.getInsurer().getInsurerId());
+
+        if (verificationCode.isPresent() && Objects.equals(verificationCode.get().getVerificationCode(), request.getVerificationCode())) {
+            return Response.ok(formResponseService.formBaseResponse(request, 0L, "Обработан успешно")).build();
+        } else {
+            return Response.ok(formResponseService.formBaseResponse(request, 5L, "Неверный код")).build();
+        }
     }
 
     @Transactional
