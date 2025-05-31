@@ -16,6 +16,6 @@ public class InsurerRepository implements PanacheRepository<Insurer> {
     }
 
     public Optional<Insurer> findByLogin(String login) {
-        return find("login=?1", login).firstResultOptional();
+        return find("account.login=?1", login).firstResultOptional();
     }
 }

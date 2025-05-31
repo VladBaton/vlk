@@ -21,7 +21,7 @@ public class Account extends PanacheEntityBase {
     @Column(name = "ROLE")
     private String role;
 
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "account", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Insurer insurer;
 
     public Long getAccountId() {

@@ -78,11 +78,11 @@ public class AccountService {
     public Response deleteAccount(DeleteAccountRequest request) {
 
         Insurer insurer = insurerRepository.findByLogin(request.getLogin()).orElseThrow();
-        insurer.getAccount().delete();
+        accountRepository.delete(insurer.getAccount());
         insurer.setAccount(null);
 
         return Response
-                .ok(formResponseService.formBaseResponse(request, 0L, "Пароль сброшен"))
+                .ok(formResponseService.formBaseResponse(request, 0L, "Аккаунт удалён"))
                 .build();
     }
 
