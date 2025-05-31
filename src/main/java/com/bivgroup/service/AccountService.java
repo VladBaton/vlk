@@ -4,19 +4,23 @@ import com.bivgroup.constant.Constants;
 import com.bivgroup.entity.Account;
 import com.bivgroup.entity.Contract;
 import com.bivgroup.entity.Insurer;
+import com.bivgroup.entity.VerificationCode;
 import com.bivgroup.mapper.BaseResponseMapper;
 import com.bivgroup.mapper.EntityToPojoMapper;
 import com.bivgroup.pojo.request.*;
 import com.bivgroup.repository.AccountRepository;
 import com.bivgroup.repository.ContractRepository;
 import com.bivgroup.repository.InsurerRepository;
+import com.bivgroup.repository.VerificationCodeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
 @ApplicationScoped
 public class AccountService {
@@ -31,10 +35,32 @@ public class AccountService {
     AccountRepository accountRepository;
 
     @Inject
+    VerificationCodeRepository verificationCodeRepository;
+
+    @Inject
     FormResponseService formResponseService;
 
     @Inject
     HandbookService handbookService;
+
+    @Transactional
+    public Response createVerificationCode(CreateVerificationCodeRequest request) {
+        Contract contract = contractRepository.findByContractNumber(request.getContractNumber()).orElseThrow();
+
+        VerificationCode verificationCode = new VerificationCode();
+        verificationCode.setExpirationDate(new Date(new Date().getTime() + 600000L));
+        verificationCode.setIsUsed(false);
+        verificationCode.setVerificationCode(String.valueOf(UUID.randomUUID()));
+        verificationCode.setInsurer(contract.getInsurer());
+        verificationCodeRepository.persist(verificationCode);
+
+        contract.getInsurer().getVerificationCodes().add(verificationCode);
+
+
+        return Response
+                .ok(formResponseService.formBaseResponse(request, 0L, "Проверочный код успешно создан"))
+                .build();
+    }
 
     @Transactional
     public Response createAccount(CreateAccountRequest request) {

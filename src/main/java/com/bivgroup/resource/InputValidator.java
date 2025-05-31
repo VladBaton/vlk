@@ -61,6 +61,14 @@ public class InputValidator {
         }
     }
 
+    public void validateCreateVerificationCodeRequest(@Valid CreateVerificationCodeRequest request) throws HandledServiceException {
+        Contract contract = contractRepository.findByContractNumber(request.getContractNumber())
+                .orElseThrow(() -> new HandledServiceException(1L, "Контракт не найден"));
+        if (Objects.nonNull(contract.getInsurer().getAccount())) {
+            throw new HandledServiceException(5L, "Аккаунт уже создан, логин: " + contract.getInsurer().getAccount().getLogin());
+        }
+    }
+
     public void validateUpdateAccountRequest(@Valid UpdateAccountRequest request) {
         //Вставить сюда логику
     }

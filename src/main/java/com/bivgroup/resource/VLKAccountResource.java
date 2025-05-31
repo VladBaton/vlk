@@ -42,6 +42,16 @@ public class VLKAccountResource {
     }
 
     @POST
+    @Path("createVerificationCode")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
+    public Response createVerificationCode(CreateVerificationCodeRequest request) throws HandledServiceException {
+        inputValidator.validateCreateVerificationCodeRequest(request);
+        return accountService.createVerificationCode(request);
+    }
+
+    @POST
     @Path("create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
