@@ -7,6 +7,7 @@ import com.bivgroup.pojo.request.*;
 import com.bivgroup.repository.AccountRepository;
 import com.bivgroup.repository.ContractRepository;
 import com.bivgroup.repository.InsurerRepository;
+import com.bivgroup.repository.VerificationCodeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -27,6 +28,9 @@ public class InputValidator {
 
     @Inject
     AccountRepository accountRepository;
+
+    @Inject
+    VerificationCodeRepository verificationCodeRepository;
 
     public void validateGetNotificationsByContractNumberRequest(@Valid GetNotificationsByContractNumberRequest request) throws HandledServiceException {
         Optional<Contract> contract = contractRepository.findByContractNumber(request.getContractNumber());
@@ -66,6 +70,11 @@ public class InputValidator {
                 .orElseThrow(() -> new HandledServiceException(1L, "Контракт не найден"));
         if (Objects.nonNull(contract.getInsurer().getAccount())) {
             throw new HandledServiceException(5L, "Аккаунт уже создан, логин: " + contract.getInsurer().getAccount().getLogin());
+        }
+
+        if (verificationCodeRepository
+                .findActiveVerificationCodeByInsurerId(contract.getInsurer().getInsurerId()).isPresent()) {
+            throw new HandledServiceException(5L, "Код подтверждения уже выслан");
         }
     }
 
