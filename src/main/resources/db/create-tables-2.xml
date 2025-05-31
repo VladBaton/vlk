@@ -145,4 +145,47 @@
         <comment>CHSU-0009: добавление столбца isActive в таблицу Account</comment>
     </changeSet>
 
+    <changeSet id="CHSU-0010-1" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <and>
+                <not>
+                    <tableExists tableName="VERIFICATIONCODE"/>
+                </not>
+                <tableExists tableName="INSURER"/>
+            </and>
+        </preConditions>
+        <createTable tableName="VERIFICATIONCODE">
+            <column name="VERIFICATIONCODEID" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="VERIFICATIONCODE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPIRATIONDATE" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ISUSED" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INSURERID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <comment>CHSU-0010: Создание таблицы для хранения кодов подтверждени</comment>
+    </changeSet>
+
+    <changeSet id="CHSU-0010-2" author="Vladislav.Suslonov">
+        <preConditions onFail="HALT">
+            <and>
+                <tableExists tableName="VERIFICATIONCODE"/>
+                <tableExists tableName="INSURER"/>
+            </and>
+        </preConditions>
+        <addForeignKeyConstraint baseTableName="VERIFICATIONCODE"
+                                 baseColumnNames="INSURERID"
+                                 constraintName="FK_VERCODE_INSURER"
+                                 referencedTableName="INSURER"
+                                 referencedColumnNames="INSURERID"/>
+    </changeSet>
+
 </databaseChangeLog>

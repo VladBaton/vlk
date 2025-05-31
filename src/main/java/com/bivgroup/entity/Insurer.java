@@ -25,6 +25,9 @@ public class Insurer {
     @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contract> contracts;
 
+    @OneToMany(mappedBy = "insurer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VerificationCode>  verificationCodes;
+
     @OneToOne
     @JoinColumn(name = "ACCOUNTID", referencedColumnName = "ACCOUNTID")
     private Account account;
@@ -91,5 +94,13 @@ public class Insurer {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public List<VerificationCode> getVerificationCodes() {
+        return verificationCodes;
+    }
+
+    public void setVerificationCodes(List<VerificationCode> verificationCodes) {
+        this.verificationCodes = verificationCodes;
     }
 }
