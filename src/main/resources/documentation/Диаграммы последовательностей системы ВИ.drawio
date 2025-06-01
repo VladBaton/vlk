@@ -1,4 +1,4 @@
-<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-04-22T19:19:25.197Z" etag="hppOaB6GNjAj4QYBC9iR" version="23.1.5" type="embed" pages="10">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-06-01T08:50:30.598Z" etag="7kevJu1K8n_PoyT5l8Zp" version="23.1.5" type="embed" pages="10">
   <diagram name="Создание учётной записи в ВЛК" id="D1DBwT71Y2lzGkE738fn">
     <mxGraphModel dx="872" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -250,7 +250,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="ggyNemGRbyas3hvRtvYN" name="Сброс пароля">
+  <diagram id="ggyNemGRbyas3hvRtvYN" name="Удаление учётной записи">
     <mxGraphModel dx="872" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -279,7 +279,7 @@
             <mxPoint x="421" y="142" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="z5D-WwMQPpGvMNh0VOFS-6" value="Запрос на сброс пароля(id пользователя)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;" parent="1" vertex="1">
+        <mxCell id="z5D-WwMQPpGvMNh0VOFS-6" value="Запрос на удаление учётной записи (id пользователя)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="150" y="110" width="208" height="30" as="geometry" />
         </mxCell>
         <mxCell id="z5D-WwMQPpGvMNh0VOFS-9" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
