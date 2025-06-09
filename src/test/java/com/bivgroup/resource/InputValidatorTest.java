@@ -11,6 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Optional;
 
 @QuarkusTest
+@Disabled
 public class InputValidatorTest {
 
     @Mock

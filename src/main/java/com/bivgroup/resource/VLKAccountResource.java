@@ -33,7 +33,7 @@ public class VLKAccountResource {
     @POST
     @Path("authorize")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @PermitAll
     public Response authorize(AuthorizationRequest request) throws HandledServiceException {
         inputValidator.validateAuthorizationRequest(request);
@@ -44,7 +44,7 @@ public class VLKAccountResource {
     @POST
     @Path("createVerificationCode")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @PermitAll
     public Response createVerificationCode(CreateVerificationCodeRequest request) throws HandledServiceException {
         inputValidator.validateCreateVerificationCodeRequest(request);
@@ -54,7 +54,7 @@ public class VLKAccountResource {
     @POST
     @Path("validateVerificationCode")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @PermitAll
     public Response validateVerificationCode(ValidateVerificationCodeRequest request) throws HandledServiceException {
         return accountService.validateVerificationCode(request);
@@ -63,7 +63,7 @@ public class VLKAccountResource {
     @POST
     @Path("create")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @PermitAll
     public Response createAccount(CreateAccountRequest request) throws HandledServiceException {
         inputValidator.validateCreateAccountRequest(request);
@@ -73,7 +73,7 @@ public class VLKAccountResource {
     @POST
     @Path("delete")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @RolesAllowed({"user", "admin"})
     public Response deleteAccount(DeleteAccountRequest request) throws HandledServiceException {
         inputValidator.validateDeleteAccountRequest(request);
@@ -83,7 +83,7 @@ public class VLKAccountResource {
     @POST
     @Path("disable")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @RolesAllowed({"admin"})
     public Response disableAccounts(DisableAccountsRequest request) {
         return accountService.disableAccounts(request);
@@ -92,7 +92,7 @@ public class VLKAccountResource {
     @POST
     @Path("enable")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     @RolesAllowed({"admin"})
     public Response enableAccounts(EnableAccountsRequest request) {
         return accountService.enableAccounts(request);

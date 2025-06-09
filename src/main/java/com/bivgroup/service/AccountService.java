@@ -168,6 +168,7 @@ public class AccountService {
         account.setLogin(request.getLogin());
         account.setPassword(hashPassword(request.getPassword()));
         account.setRole("user");
+        account.setIsActive(true);
         return account;
     }
 
