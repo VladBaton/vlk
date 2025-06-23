@@ -28,6 +28,7 @@ public interface EntityToPojoMapper {
             "contract.getPayments().stream().map(payment -> EntityToPojoMapper.INSTANCE.toPaymentPojo(payment)).collect(java.util.stream.Collectors.toList())" +
             ")")
     @Mapping(target = "contractExt", expression = "java(handbookService.getContractExtensionMap(contract))")
+    @Mapping(target = "contractSysName", expression = "java(contract.getProduct().getProductSysName())")
     Contract toContractPojo(com.bivgroup.entity.Contract contract, @Context HandbookService handbookService);
 
     @Mapping(target = "insurerName", expression = "java(insurer.getName())")
